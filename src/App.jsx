@@ -15,7 +15,9 @@ import {
   resetGameStorage,
   saveGameToStorage
 } from './logic/storage'
-import { BoardTile } from './components/BoardTile'
+import  {BoardTile}  from './components/BoardTile'
+import xImg from "./assets/ironMan.png";
+import oImg from "./assets/thanos.png";
 
 function App() {
   const [board, setBoard] = useState(
@@ -72,6 +74,7 @@ function App() {
   }, [board])
 
   return (
+    <>
     <main className="App">
       <header>
         <a href="./" className="branding">
@@ -81,6 +84,22 @@ function App() {
           </h1>
         </a>
       </header>
+    {/* <div className="flex flex-col">
+      <div className='flex justify-center items-center'>
+        <span>
+        <img src={xImg} alt="x" /> 
+
+        </span>
+        <span>
+          = X
+          </span>
+
+      </div>
+      <div className='flex justify-center items-center'>
+        <img src={oImg} alt="x" /> = O
+
+      </div>
+    </div> */}
       <section className="board">
         {board.map((value, index) => (
           <BoardTile
@@ -96,17 +115,20 @@ function App() {
         <button onClick={handleReset}>Reset</button>
         {winner === null && (
           <p>
-            <span>{turn}</span>'s turn
+            <span><img style={{width:50, height:50, backgroundColor: "none"}} src={turn === "X" ? xImg : oImg} alt="" /></span>'s turn
           </p>
         )}
         {winner === false && <p>TIE!</p>}
         {winner && (
           <p>
-            <span>{winner}</span> won!
+            <span>
+              <img style={{width:50, height:50, backgroundColor: "none"}} src={winner === "X" ? xImg : oImg} alt="" />
+            </span> won!
           </p>
         )}
       </footer>
     </main>
+    </>
   )
 }
 
